@@ -33,8 +33,9 @@ export class RoleAddPermissionUsecase implements IUsecase {
 
     const entity = new RoleEntity(role);
 
+    // const permissions = await this.permissionRepository.findAll();
     const permissions = await this.permissionRepository.findIn({ name: input.permissions });
-
+    console.log(permissions);
     for (const permission of input.permissions) {
       const permissionAlreadyCreated = permissions.find((p) => p.name === permission);
 
@@ -46,11 +47,11 @@ export class RoleAddPermissionUsecase implements IUsecase {
 
       const permissionAlreadyAssociated = entity.permissions.find((p) => p.name === permission);
 
-      if (permissionAlreadyAssociated) {
-        continue;
+      if (permissionAlreadyCreated) {
+        if (!permissionAlreadyAssociated) {
+          entity.permissions.push(permissionAlreadyCreated);
+        }
       }
-
-      entity.permissions.push(permissionAlreadyCreated);
     }
 
     await this.roleRepository.create(entity);

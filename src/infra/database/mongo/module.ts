@@ -40,6 +40,36 @@ import { MongoService } from './service';
       },
       inject: [ISecretsAdapter, ILoggerAdapter],
       imports: [SecretsModule, LoggerModule]
+    }),
+    MongooseModule.forRootAsync({
+      connectionName: ConnectionName.CATEGORIES,
+      useFactory: ({ MONGO: { MONGO_URL } }: ISecretsAdapter, logger: ILoggerAdapter) => {
+        const connection = new MongoService().getConnection({ URI: MONGO_URL });
+        return {
+          connectionFactory: (connection: Connection) => {
+            if (connection.readyState === 1) {
+              logger.log('🎯 CATEGORIES mongo connected successfully!');
+            }
+            connection.on('disconnected', () => {
+              logger.fatal(new ApiInternalServerException('CATEGORIES mongo disconnected!'));
+            });
+            connection.on('reconnected', () => {
+              logger.log(red('CATEGORIES mongo reconnected!\n'));
+            });
+            connection.on('error', (error) => {
+              logger.fatal(
+                new ApiInternalServerException(error.message || error, { context: 'MongoCategoriesConnection' })
+              );
+            });
+
+            return connection;
+          },
+          uri: connection.uri,
+          appName: `${name}-categories`
+        };
+      },
+      inject: [ISecretsAdapter, ILoggerAdapter],
+      imports: [SecretsModule, LoggerModule]
     })
   ]
 })

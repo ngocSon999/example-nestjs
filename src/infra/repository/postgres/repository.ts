@@ -3,6 +3,7 @@ import {
   FindOneOptions,
   FindOptionsSelectByString,
   FindOptionsWhere,
+  In,
   Raw,
   Repository,
   SaveOptions
@@ -75,9 +76,10 @@ export class TypeORMRepository<T extends BaseEntity & IEntity = BaseEntity & IEn
     const where: { [key: string]: unknown } = {
       deletedAt: null
     };
-    for (const key of Object.keys(filter)) {
-      where[`${key}`] = { $in: (filter as { [key: string]: unknown })[`${key}`] };
+    for (const key of Object.keys(filter) as (keyof T)[]) {
+      where[key as string] = In(filter[key] as string[]);
     }
+
     return this.repository.find({
       where
     } as FindOneOptions<T>);

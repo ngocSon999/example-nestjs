@@ -30,8 +30,8 @@ export class RoleDeletePermissionUsecase implements IUsecase {
     }
 
     const entity = new RoleEntity(role);
-
-    const permissions = await this.permissionRepository.findIn({ name: input.permissions });
+    // const permissions = await this.permissionRepository.findIn({ name: input.permissions });
+    const permissions = entity.permissions;
 
     for (const permission of input.permissions) {
       const permissionExists = permissions.find((p) => p.name === permission);

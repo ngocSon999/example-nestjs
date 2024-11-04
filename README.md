@@ -239,11 +239,11 @@ Creating a CRUD in Postgres and Mongo in seconds.
 │   │   │       │   ├── cat-get-by-id.spec.ts
 │   │   │       │   ├── cat-list.spec.ts
 │   │   │       │   └── cat-update.spec.ts
-│   │   │       ├── cat-create.ts
-│   │   │       ├── cat-delete.ts
-│   │   │       ├── cat-get-by-id.ts
-│   │   │       ├── cat-list.ts
-│   │   │       └── cat-update.ts
+│   │   │       ├── category-create.ts
+│   │   │       ├── category-delete.ts
+│   │   │       ├── category-get-by-id.ts
+│   │   │       ├── category-list.ts
+│   │   │       └── category-update.ts
 │   │   ├── permission
 │   │   │   ├── entity
 │   │   │   │   └── permission.ts

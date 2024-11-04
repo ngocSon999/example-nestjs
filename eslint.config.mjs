@@ -52,15 +52,15 @@ export default [
 
             parserOptions: {
                 project: 'tsconfig.json',
-                tsconfigRootDir: '/home/mike/Documents/pessoal/nestjs-microservice-boilerplate-api'
+                tsconfigRootDir: __dirname
             }
         },
 
         rules: {
             'no-console': [
-                'error',
+                'warn',
                 {
-                    allow: ['error']
+                    allow: ['warn']
                 }
             ],
 

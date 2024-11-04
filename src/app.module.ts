@@ -3,6 +3,7 @@ import { APP_GUARD, Reflector } from '@nestjs/core';
 
 import { InfraModule } from '@/infra/module';
 import { CatModule } from '@/modules/cat/module';
+import { CategoryModule } from '@/modules/category/module';
 import { HealthModule } from '@/modules/health/module';
 import { LoginModule } from '@/modules/login/module';
 import { LogoutModule } from '@/modules/logout/module';
@@ -24,6 +25,7 @@ import { RoleModule } from './modules/role/module';
     LoginModule,
     LogoutModule,
     CatModule,
+    CategoryModule,
     ResetPasswordModule,
     RoleModule,
     PermissionModule

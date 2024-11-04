@@ -1,3 +1,4 @@
 export enum ConnectionName {
-  CATS = `CATS_CONNECTION`
+  CATS = `CATS_CONNECTION`,
+  CATEGORIES = `CATEGORIES_CONNECTION`
 }
